@@ -1,8 +1,28 @@
 #!/usr/bin/env python3
 
+import getopt
+import sys
 import random
 
-len = 8
-sets = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?-_"
-p =  "".join(random.sample(sets,len))
-print(p)
+def main(argv):
+
+    lca = "abcdefghijklmnopqrstuvwxyz"
+    uca = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    num = "1234567890"
+    ext = "@#$%^&*()_-?"
+
+    leng = 8
+    sets = lca + uca + num + ext
+    opts, args = getopt.getopt(argv, "hl:", ["length="])
+
+    for opt, arg in opts:
+        if opt == "-h":
+            print('pswd-gen -l <password length>')
+            sys.exit()
+        elif opt in ("-l", "--length"):
+            leng = int(arg)
+    p =  "".join(random.sample(sets,leng))
+    print(p)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
