@@ -3,13 +3,14 @@
 import getopt
 import sys
 import random
+import string
 
 def main(argv):
 
-    lca = "abcdefghijklmnopqrstuvwxyz"
-    uca = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    num = "1234567890"
-    ext = "@#$%^&*()_-?"
+    lca = string.ascii_lowercase
+    uca = string.ascii_uppercase
+    num = string.digits
+    ext = string.punctuation
 
     leng = 8
     sets = lca + uca + num + ext
