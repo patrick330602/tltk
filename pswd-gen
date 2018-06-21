@@ -13,16 +13,45 @@ def main(argv):
     ext = string.punctuation
 
     leng = 8
+    strict = 0
     sets = lca + uca + num + ext
-    opts, args = getopt.getopt(argv, "hl:", ["length="])
+    p = ""
+
+    opts, args = getopt.getopt(argv, "hl:t:s", ["length=","output-type=", "strict"])
 
     for opt, arg in opts:
         if opt == "-h":
-            print('pswd-gen -l <password length>')
+            print('pswd-gen -l <password length> -t <output type> -s')
             sys.exit()
         elif opt in ("-l", "--length"):
             leng = int(arg)
-    p =  "".join(random.sample(sets,leng))
+            if leng < 4:
+                print("You have set a password that is less than 4 characters, and that's unsafe. Reset to 8.")
+                leng = 8
+        elif opt in ("-t", "--output-type"):
+            if arg == '0':
+                sets = lca + uca + num + ext
+            elif arg == '1':
+                sets = lca + uca
+            elif arg == '2':
+                sets = num
+            elif arg == '3':
+                sets = lca + uca + num
+            elif arg == '4':
+                sets = lca + uca + ext
+            elif arg == '5':
+                sets = num + ext
+        elif opt in ("-s", "--strict"):
+            sets = lca + uca + num + ext
+            strict = 1
+    if strict == 1 :
+        if leng < 4:
+            print("You have set a password that is less than 4 characters, and that's unsafe. Reset to 8.")
+            leng = 8
+
+        p = random.choice(uca)+random.choice(lca)+random.choice(num)+random.choice(ext)+ "".join(random.sample(sets,leng-4))
+    else:
+        p =  "".join(random.sample(sets,leng))
     print(p)
 
 if __name__ == "__main__":
