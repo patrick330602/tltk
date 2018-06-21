@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+
+import random
+
+len = 8
+sets = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?-_"
+p =  "".join(random.sample(sets,len))
+print(p)
