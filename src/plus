@@ -21,8 +21,7 @@ def install_ohmyzsh():
 def main(args):
     arg = args[1]
     if arg in ("-h", "--help"):
-        print("add <apps>")
-        sys.exit()
+        print("plus <apps>")
     elif arg == "nvm":
         install_nvm()
     elif arg in ("oh_my_zsh", "oh-my-zsh", "ohmyzsh"):
