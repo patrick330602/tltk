@@ -1,26 +1,17 @@
 #!/usr/bin/env bash
 BUILD_DIR=`mktemp --tmpdir --directory tltk-build-debian.XXXX`
-BUILD_VER="0.3-1"
+BUILD_VER="0.4-1"
 CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/}
 
-touch $BUILD_DIR/DEBIAN/{changelog,control}
-
-cat <<EOF >>$BUILD_DIR/DEBIAN/changelog
-tltk ($BUILD_VER) stable; urgency=low
-
- * First version.
-
--- Patrick Wu <wotingwu@live.com>  Wed, 04 Jul 2018 12:00:00 +0800
-
-EOF
+touch $BUILD_DIR/DEBIAN/control
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: tltk
 Architecture: all
 Maintainer: Patrick Wu <wotingwu@live.com>
-Depends: python3
+Depends: python3, python3-requests
 Priority: optional
 Version: $BUILD_VER
 Description: Tiny Little ToolKit
