@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 BUILD_DIR=`mktemp --tmpdir --directory tltk-build-debian.XXXX`
-BUILD_VER="0.4-1"
+BUILD_VER="0.6-1"
 CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/}
@@ -11,11 +11,11 @@ cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: tltk
 Architecture: all
 Maintainer: Patrick Wu <wotingwu@live.com>
-Depends: python3, python3-requests
+Depends: python3, python3-requests, python3-gi, python3-pip
 Priority: optional
 Version: $BUILD_VER
 Description: Tiny Little ToolKit
- This is a small collection of utilities by me using python3. 
+ This is a small collection of utilities by Patrick Wu using Python3. 
 EOF
 
 cp src/* $BUILD_DIR/usr/bin/
