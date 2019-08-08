@@ -11,7 +11,7 @@ cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: tltk
 Architecture: all
 Maintainer: Patrick Wu <wotingwu@live.com>
-Depends: python3, python3-requests, python3-gi, python3-pip
+Depends: python3, python3-requests, python3-gi, python3-pip, python3-six
 Priority: optional
 Version: $BUILD_VER
 Description: Tiny Little ToolKit
