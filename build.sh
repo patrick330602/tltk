@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 BUILD_DIR=`mktemp --tmpdir --directory tltk-build-debian.XXXX`
-BUILD_VER="0.6-1"
+BUILD_VER="0.7-0"
 CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/}
