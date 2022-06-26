@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import requests
+import re
+from urllib.parse import unquote
+
+def create_folder(folder_name):
+    import os
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+def download_file_from_url_with_custom_name_and_destination(url, file_name, destination):
+    r = requests.get(url, stream=True)
+    full_path =destination + "/" + file_name + ".ogg"
+    with open(full_path, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=1024):
+            if chunk:
+                f.write(chunk)
+                f.flush()
+    print("downloaded: " + full_path)
+
+folder_name='Blue Archive OST'
+create_folder(folder_name)
+a = requests.get('https://bluearchive.fandom.com/wiki/Blue_Archive/Soundtrack')
+b=a.content
+x=re.findall(r'(?<=<audio src="https:\/\/static\.wikia\.nocookie\.net\/blue-archive).*?(?=<\/audio>)',b.decode('utf-8'))
+
+for i in x:
+    c = re.findall(r'\/images/.*revision\/latest\?cb=[\d]{14}',i)[0]
+    f = re.findall(r'(?<=<a href=\"https:\/\/bluearchive\.fandom\.com\/wiki\/File:).*?(?=\.ogg\">)',i)[0]
+    f = unquote(f)
+    download_file_from_url_with_custom_name_and_destination("https://static.wikia.nocookie.net/blue-archive" + c, f, folder_name)
