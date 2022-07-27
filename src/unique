@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+import sys
+from argparse import ArgumentParser
+
+parser = ArgumentParser(description='Find the unique lines in a file.')
+parser.add_argument('file', help='the file to find unique lines in')
+parser.add_argument('-o', '--output', default="test_out", help='the file to write the unique lines to')
+parser.add_argument('-d', '--delimiter', default='\n', help='the delimiter to use when counting')
+parser.add_argument('-p', '--print', action='store_true', help='print the unique lines to stdout')
+arg = parser.parse_args()
+
+try:
+    ll = []
+    with open(arg.file, "r+") as f:
+        for l in f.readlines():
+            ll.append(l.replace("\n", ""))
+    ll = sorted(set(ll))
+    if arg.print:
+        for l in ll:
+            print(l)
+    else:
+        with open(arg.output, "w") as f:
+            for i in range(len(ll)):
+                ul = ll[i]
+                if i != len(ll) - 1:
+                    ul += arg.delimiter
+                f.write(ul)
+except FileNotFoundError:
+    print("File not found")
+    sys.exit(1)
